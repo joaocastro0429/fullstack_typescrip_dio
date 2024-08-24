@@ -1,18 +1,17 @@
 import express, { response } from 'express'
+import { userContrller } from './controllers/userController'
+
+
 
 const server=express()
 
 server.use(express.json())
 
-server.get("/users",(request, response)=>{
-    return response.json({message:"dioBlanck API"})
-})
+const userControllers=new userContrller
 
-server.post("/user",(request,response)=>{
-    const body=request.body
-    console.log(body)
-    return response.status(201).json({message:"usuário criado"})
-})
+server.get("/users",userControllers.getUsers)
+
+server.post("/user",userControllers.createUser)
 
 
 server.listen(5555,()=>console.log('running run server'))
